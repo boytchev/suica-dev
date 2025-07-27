@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<script src="cases.js"></script>
+	<script src="test.js"></script>
+</head>
+
+<body onload="startTests()">
+
+	<div id="timer"><label for="progress"></label></div>
+	<progress id="progress" value="0" max="0" style="width:40em;"></progress>
+
+	<table>
+	<tr>
+	<td rowspan="2">
+		<iframe id="sandbox" src="about:blank" height="420" width="420" style="border: solid 1px black;"></iframe>
+	</td>
+	<td>
+	<img id="result-image" src="test.png" style="border: solid 1px black; margin-bottom: 8px; margin-left: 10px;" height="200" width="200">
+	</td>
+	</tr>
+	<tr>
+	<td>
+	<img id="target-image" src="test.png" style="border: solid 1px black; margin-left: 10px;" height="200" width="200">
+	</td></tr></table>
+	<br>
+	<div id="log"></div>
+</body>
+</html>

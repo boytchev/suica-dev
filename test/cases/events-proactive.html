@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<script src="../test.js"></script>
+</head>
+
+<body>
+	<suica proactive>
+		<demo>
+		<cube x="+30" size="20" color="peachpuff" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+		<cube x="-30" size="20" color="lightsalmon" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+		<cube z="+30" size="20" color="linen" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+		<cube z="-30" size="20" color="gray" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+	</suica>
+	
+	<script>
+		setTimeout( ()=>simulatePointerEvent('pointermove',350,200), 100 );
+		
+		function onPointerEnter( event )
+		{
+			this.oldColor = this.color;
+			this.color = 'black';
+		}
+		
+		function onPointerLeave( )
+		{
+			this.color = this.oldColor;
+		}
+		
+	</script>
+</body>
+</html>

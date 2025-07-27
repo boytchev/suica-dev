@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<script src="../test.js"></script>
+</head>
+
+<body>
+	<suica>
+	</suica>
+	
+	
+	<script>
+var colors=[				'red',
+				'Red',
+				'RED',
+				
+				16711680,
+				0xFF0000,
+				0XFF0000,
+				'0XFF0000',
+				'0xFF0000',
+				'0xff0000',
+				'0Xff0000',
+				
+				[1, 0, 0],
+				'1,0,0',
+				'1, 0, 0',
+				
+				'rgb(255,0,0)',
+				'rgb( 255, 0, 0)',
+				' rgb ( 255 , 0 , 0 ) ',
+				'RGB( 255, 0, 0 )',
+				rgb( 255, 0, 0 ),
+				
+				'hsl(0,100,50)',
+				'hsl( 0, 100, 50 )',
+				' hsl ( 0 , 100 , 50 ) ',
+				'HSL( 0, 100, 50 )',
+				hsl( 0, 100, 50 ),		
+				
+				new THREE.Color('red'),
+				new THREE.Color(1,0,1) // shoud not be red	
+]
+
+		for( var x = 0; x<5; x++ ) 
+		for( var y = 0; y<5; y++ ) 
+		{
+			circle( [12*(x-2),12*(y-2),0], 12, colors.shift() );
+		}
+	</script>
+
+</body>
+</html>

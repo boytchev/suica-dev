@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Object's center</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="logo.png"/>
+	<link rel="stylesheet" href="examples.css">
+	
+	<script src="suica.js"></script>
+</head>
+
+<body>
+
+	<h1>Object as position</h1>
+	<p>Using objects as positions for other objects.</p>
+
+	<suica>
+		<demo>
+		<cube id="a" x="-20" color="dimgray" wireframe>
+		<cube id="b" x="20" color="dimgray" wireframe>
+		<sphere center="a" size="20" color="linen">
+		<cone center="b" size="20" y="-10" color="peachpuff">
+	</suica>
+	
+</body>
+</html>

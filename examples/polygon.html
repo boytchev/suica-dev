@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Polygon</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="logo.png"/>
+	<link rel="stylesheet" href="examples.css">
+	
+	<script src="suica.js"></script>
+</head>
+
+<body>
+
+	<h1>Polygon</h1>
+	<p>Defining polygons with different properties.</p>
+
+	<suica>
+		<demo>
+		<polygon count="9" x="-45" size="20" spinS="-70" color="lightgray">
+		<polygon count="4" x="-25" size="20" spinS="-45" color="lightsalmon">
+		<polygon id="a" color="black">
+		<polygon count="5" x="25" size="20" spinS="-54" color="peachpuff">
+		<polygon count="6" x="45" size="20" spinS="-60" color="dimgray">
+	</suica>
+	
+	<script>
+		setInterval( randomPolygon, 500 );
+		
+		function randomPolygon() 		{
+
+			a.count = Math.round( random( 3, 12 ) );
+			a.spinS = -180*( 1/2-1/a.count );
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Group tag</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="logo.png"/>
+	<link rel="stylesheet" href="examples.css">
+	
+	<script src="suica.js"></script>
+</head>
+
+<body>
+
+	<h1>Group tag</h1>
+	<p>Grouping objects into a single object in HTML tags.</p>
+
+	<suica>
+		<demo distance="120">
+		<group id="pawn" center="0,10,0" color="linen">
+			<sphere y="25" size="10">
+			<sphere y="19" size="10,2,10">
+			<cone size="12,25">
+			<cone size="20,10">
+		</group>
+		
+		<sphere size="29" color="black">
+	</suica>
+
+	<script>
+		pawn.clone.style( { color: 'lightcoral', center: [ 0, 0, 10 ], spinV: 90 } );
+		pawn.clone.style( { color: 'dimgray', center: [ 0, -10, 0 ], spinV: 180 } );
+		pawn.clone.style( { color: 'peachpuff', center: [ 0, 0, -10 ], spinV: 270 } );
+	</script>
+</body>
+</html>

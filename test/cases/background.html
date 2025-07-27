@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<script src="../test.js"></script>
+</head>
+
+<body>
+	<suica ontime="rainbow">
+		<cube color="lightsalmon">
+		<demo distance="150" altitude="0">
+	</suica>
+	
+	<script>
+		function rainbow( t )
+		{
+			background( 'hsl('+Math.round((100*t)%360)+',100%,90%)' );
+		}
+	</script>
+</body>
+</html>

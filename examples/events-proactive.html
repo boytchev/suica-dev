@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Proactive events</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="logo.png"/>
+	<link rel="stylesheet" href="examples.css">
+	
+	<script src="suica.js"></script>
+</head>
+
+<body>
+
+	<h1>Proactive events</h1>
+	<p>Capturing when an object moves under the mouse pointer.</p>
+
+	<suica proactive>
+		<demo>
+		<cube x="+30" size="20" color="peachpuff" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+		<cube x="-30" size="20" color="lightsalmon" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+		<cube z="+30" size="20" color="linen" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+		<cube z="-30" size="20" color="gray" onpointerenter="onPointerEnter" onpointerleave="onPointerLeave">
+	</suica>
+	
+	<script>
+
+		function onPointerEnter( event ) 		{
+
+			this.oldColor = this.color;
+			this.color = 'black';
+		}
+		
+		function onPointerLeave( ) 		{
+
+			this.color = this.oldColor;
+		}
+		
+	</script>
+</body>
+</html>
