@@ -97728,9 +97728,13 @@ class Suica {
 
 		// default light
 		this.light = new DirectionalLight( 'white', 0.9*Math.PI );
-		this.light.position.set( 1000, 1571, 3142 );
+		this.light.position.set( 0, 0, 10 );
+		this.light.decay = 0;
+		//		this.light.angle = Math.PI/2;
+		this.light.target = new Object3D();
+
 		//		this.light.decay = 0;
-		this.scene.add( this.light );
+		this.scene.add( this.light, this.light.target );
 
 		// ambient light
 		this.scene.add( new AmbientLight( 'white', Math.PI-this.light.intensity ) );
@@ -97744,16 +97748,29 @@ class Suica {
 
 			that.camera.up.copy( that.orientation.UP );
 			that.controls.update( );
+
 			that.light.position.copy( that.camera.position );
-			that.light.position.multiply( that.orientation.SCALE );
+			that.light.target.position.set( 0, 0, 0 );
+
+			if ( that.orientation==ORIENTATIONS.YXZ ) that.light.position.y *= -1;
+			if ( that.orientation==ORIENTATIONS.ZYX ) that.light.position.z *= -1;
+			if ( that.orientation==ORIENTATIONS.XZY ) that.light.position.x *= -1;
 
 		}
 
 		function adjustTrackballControls( ) {
 
 			that.controls.update( );
+			///			that.light.position.copy( that.camera.position );
+			///			that.light.position.multiply( that.orientation.SCALE );
+
 			that.light.position.copy( that.camera.position );
-			that.light.position.multiply( that.orientation.SCALE );
+			that.light.target.position.set( 0, 0, 0 );
+
+			if ( that.orientation==ORIENTATIONS.YXZ ) that.light.position.y *= -1;
+			if ( that.orientation==ORIENTATIONS.ZYX ) that.light.position.z *= -1;
+			if ( that.orientation==ORIENTATIONS.XZY ) that.light.position.x *= -1;
+
 			that.camera.updateMatrixWorld();
 
 		}
@@ -97772,42 +97789,39 @@ class Suica {
 
 				case ORIENTATIONS.YXZ:
 					that.camera.position.set( up, cos, sin );
-					that.light.position.set( 2*up, -2*cos, 2*sin );
+					that.light.position.set( up, -cos, sin );
 					break;
 				case ORIENTATIONS.ZYX:
 					that.camera.position.set( sin, up, cos );
-					that.light.position.set( 2*sin, 2*up, -2*cos );
+					that.light.position.set( sin, up, -cos );
 					break;
 				case ORIENTATIONS.XZY:
 					that.camera.position.set( cos, sin, up );
-					that.light.position.set( -2*cos, 2*sin, 2*up );
+					that.light.position.set( -cos, sin, up );
 					break;
 
 				case ORIENTATIONS.ZXY:
 					that.camera.position.set( up, sin, -cos );
-					that.light.position.set( 2*up, 2*sin, -2*cos );
+					that.light.position.set( up, sin, -cos );
 					break;
 				case ORIENTATIONS.XYZ:
 					that.camera.position.set( -cos, up, sin );
-					that.light.position.set( -2*cos, 2*up, 2*sin );
+					that.light.position.set( -cos, up, sin );
 					break;
 				case ORIENTATIONS.YZX:
 					that.camera.position.set( sin, -cos, up );
-					that.light.position.set( 2*sin, -2*cos, 2*up );
+					that.light.position.set( sin, -cos, up );
 					break;
 				default: console.error( 'error: Unknown orientation in <suica>' );
 
 			}
 
+			that.light.target.position.set( 0, 0, 0 );
 
 			that.camera.lookAt( that.scene.position );
 
 			//the following line is required for smooth animation on old laptops
 			that.camera.updateMatrixWorld();
-
-			//that.debugObject.position.set( that.light.position.x/4, that.light.position.y/4, that.light.position.z/4 );
-			//that.light.position.set( that.light.position.x/10, that.light.position.y/10, that.light.position.z/10 );
-			//console.log(that.light.position);
 
 		}
 
@@ -97861,10 +97875,15 @@ class Suica {
 
 			}
 
-			that.light?.position.set( ...that.viewPoint.from );
-
 			//the following line is required for smooth animation on old laptops
 			that.camera.updateMatrixWorld();
+
+			that.light.position.copy( that.camera.position );
+			that.light.target.position.set( 0, 0, 0 );
+
+			if ( that.orientation==ORIENTATIONS.YXZ ) that.light.position.y *= -1;
+			if ( that.orientation==ORIENTATIONS.ZYX ) that.light.position.z *= -1;
+			if ( that.orientation==ORIENTATIONS.XZY ) that.light.position.x *= -1;
 
 		} // Suica.adjustViewPoint
 
@@ -97994,6 +98013,10 @@ class Suica {
 
 		this.uberRenderer?.dispose();
 		this.uberRenderer = new AnaglyphEffect( this, distance );
+
+		this.uberRenderer.colorMatrixLeft.set( 1, 0, 0, 0, 0, 0, 0, 0, 0 );
+		this.uberRenderer.colorMatrixRight.set( 0, 0, 0, 0, 1, 0, 0, 0, 1 );
+
 		//effect.setSize( window.innerWidth, window.innerHeight );
 
 	}
