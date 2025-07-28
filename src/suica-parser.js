@@ -2,8 +2,7 @@
 // Suica 3.0 Parser
 //
 
-import { parseSize } from './suica-globals.js';
-import { splane, spline, Suica } from './suica-main.js';
+import { ANAGLYPH, evaluate, ORTHOGRAPHIC, parseSize, PERSPECTIVE, splane, SPLANE, spline, SPLINE, STEREO } from './suica-globals.js';
 import { Drawing, image } from './suica-drawing.js';
 import { Extrude } from './suica-extrude.js';
 import { scorm } from './suica-scorm.js';
@@ -234,7 +233,7 @@ class HTMLParser {
 	parseTagANAGLYPH( suica, elem ) {
 
 		suica.anaglyph(
-			elem.getAttribute( 'distance' ) || Suica.ANAGLYPH.DISTANCE
+			elem.getAttribute( 'distance' ) || ANAGLYPH.DISTANCE
 		);
 
 	} // HTMLParser.parseTagANAGLYPH
@@ -252,7 +251,7 @@ class HTMLParser {
 	parseTagSTEREO( suica, elem ) {
 
 		suica.stereo(
-			elem.getAttribute( 'distance' ) || Suica.STEREO.DISTANCE
+			elem.getAttribute( 'distance' ) || STEREO.DISTANCE
 		);
 
 	} // HTMLParser.parseTagSTEREO
@@ -262,9 +261,9 @@ class HTMLParser {
 	parseTagPERSPECTIVE( suica, elem ) {
 
 		suica.perspective(
-			elem.getAttribute( 'near' ) || Suica.PERSPECTIVE.NEAR,
-			elem.getAttribute( 'far' ) || Suica.PERSPECTIVE.FAR,
-			elem.getAttribute( 'fov' ) || Suica.PERSPECTIVE.FOV
+			elem.getAttribute( 'near' ) || PERSPECTIVE.NEAR,
+			elem.getAttribute( 'far' ) || PERSPECTIVE.FAR,
+			elem.getAttribute( 'fov' ) || PERSPECTIVE.FOV
 		);
 
 	} // HTMLParser.parseTagPERSPECTIVE
@@ -274,8 +273,8 @@ class HTMLParser {
 	parseTagORTHOGRAPHIC( suica, elem ) {
 
 		suica.perspective(
-			elem.getAttribute( 'near' ) || Suica.ORTHOGRAPHIC.NEAR,
-			elem.getAttribute( 'far' ) || Suica.ORTHOGRAPHIC.FAR
+			elem.getAttribute( 'near' ) || ORTHOGRAPHIC.NEAR,
+			elem.getAttribute( 'far' ) || ORTHOGRAPHIC.FAR
 		);
 
 	} // HTMLParser.parseTagORTHOGRAPHIC
@@ -763,9 +762,9 @@ class HTMLParser {
 	// <spline src="func_name" interpolating="..." approximating="..." open="..." closed="...">
 	parseTagSPLINE( suica, elem ) {
 
-		var src = elem.getAttribute( 'src' ) || Suica.SPLINE.POINTS,
-			closed = Drawing.parseBool( elem, 'closed', 'open', Suica.SPLINE.CLOSED ),
-			interpolating = Drawing.parseBool( elem, 'interpolating', 'approximating', Suica.SPLINE.INTERPOLANT );
+		var src = elem.getAttribute( 'src' ) || SPLINE.POINTS,
+			closed = Drawing.parseBool( elem, 'closed', 'open', SPLINE.CLOSED ),
+			interpolating = Drawing.parseBool( elem, 'interpolating', 'approximating', SPLINE.INTERPOLANT );
 
 		var p = spline( src, closed, interpolating );
 
@@ -782,9 +781,9 @@ class HTMLParser {
 	// <spline src="func_name" interpolating="...,..." approximating="...,..." open="...,..." closed="...,...">
 	parseTagSPLANE( suica, elem ) {
 
-		var src = elem.getAttribute( 'src' ) || Suica.SPLANE.POINTS,
-			closed = Drawing.parseBoolArray( elem, 'closed', 'open', Suica.SPLANE.CLOSED ),
-			interpolating = Drawing.parseBoolArray( elem, 'interpolating', 'approximating', Suica.SPLANE.INTERPOLANT );
+		var src = elem.getAttribute( 'src' ) || SPLANE.POINTS,
+			closed = Drawing.parseBoolArray( elem, 'closed', 'open', SPLANE.CLOSED ),
+			interpolating = Drawing.parseBoolArray( elem, 'interpolating', 'approximating', SPLANE.INTERPOLANT );
 
 		var p = splane( src, closed, interpolating );
 
@@ -820,7 +819,7 @@ class HTMLParser {
 	parseTagCONVEX( suica, elem ) {
 
 		var points = elem.getAttribute( 'src' );
-		points = Suica.evaluate( '[['+points.replaceAll( ';', '],[' )+']]' );
+		points = evaluate( '[['+points.replaceAll( ';', '],[' )+']]' );
 
 		var p = suica.convex(
 			points,
@@ -841,7 +840,7 @@ class HTMLParser {
 	parseTagEXTRUDE( suica, elem ) {
 
 		var src = elem.getAttribute( 'src' );
-		src = Suica.evaluate( '['+src+']' );
+		src = evaluate( '['+src+']' );
 
 		var p = suica.extrude(
 			src,
@@ -932,7 +931,7 @@ class HTMLParser {
 
 		}
 
-		var p = drawing( width, height, color );
+		var p = window.drawing( width, height, color );
 
 		var id = elem.getAttribute( 'id' );
 		if ( id ) window[ id ] = p;
@@ -948,7 +947,7 @@ class HTMLParser {
 	// <drawing id="..." count="...">
 	parseTagSHAPE( suica, elem ) {
 
-		var p = suica.shape( elem.getAttribute( 'count' ) );
+		var p = window.shape( elem.getAttribute( 'count' ) );
 
 		var id = elem.getAttribute( 'id' );
 		if ( id ) window[ id ] = p;
@@ -965,7 +964,7 @@ class HTMLParser {
 	// <moveto x="..." y="...">
 	parseTagMOVETO( suica, elem ) {
 
-		moveTo( ...Drawing.parseXY( elem, 'point', 'x', 'y' ) );
+		window.moveTo( ...Drawing.parseXY( elem, 'point', 'x', 'y' ) );
 
 	} // HTMLParser.parseTagMOVETO
 
@@ -974,7 +973,7 @@ class HTMLParser {
 	// <lineto x="..." y="...">
 	parseTagLINETO( suica, elem ) {
 
-		lineTo( ...Drawing.parseXY( elem, 'point', 'x', 'y' ) );
+		window.lineTo( ...Drawing.parseXY( elem, 'point', 'x', 'y' ) );
 
 	} // HTMLParser.parseTagLINETO
 
@@ -984,7 +983,7 @@ class HTMLParser {
 	parseTagCURVETO( suica, elem ) {
 
 		var m = Drawing.parseXY( elem, 'm', 'mx', 'my' );
-		curveTo( ...m, ...Drawing.parseXY( elem, 'point', 'x', 'y' ) );
+		window.curveTo( ...m, ...Drawing.parseXY( elem, 'point', 'x', 'y' ) );
 
 	} // HTMLParser.parseTagCURVETO
 
@@ -996,7 +995,7 @@ class HTMLParser {
 			from = Drawing.parseN( elem, 'from', Drawing.ARC_FROM ),
 			to = Drawing.parseN( elem, 'to', Drawing.ARC_TO );
 
-		arc(
+		window.arc(
 			...Drawing.parseXY( elem, 'point', 'x', 'y' ),
 			radius,
 			from,
@@ -1010,13 +1009,13 @@ class HTMLParser {
 	// <stroke color="..." width="..." closed closed="...">
 	parseTagSTROKE( suica, elem ) {
 
-		var color = elem.getAttribute( 'color' ) || Suica.DEFAULT.STROKE.COLOR,
+		var color = elem.getAttribute( 'color' ) || Drawing.DEFAULT.STROKE.COLOR,
 			width = Drawing.parseN( elem, 'width', Drawing.STROKE_WIDTH ),
 			closed = Drawing.parseBool( elem, 'closed', '', Drawing.STROKE_CLOSED );
 
 		if ( elem.hasAttribute( 'closed' ) && elem.getAttribute( 'closed' )=="" ) closed = true;
 
-		stroke( color, width, closed );
+		window.stroke( color, width, closed );
 
 	} // HTMLParser.parseTagSTROKE
 
@@ -1026,7 +1025,7 @@ class HTMLParser {
 
 		var color = elem.getAttribute( 'color' ) || Drawing.FILL_COLOR;
 
-		fill( color );
+		window.fill( color );
 
 	} // HTMLParser.parseTagFILL
 
@@ -1038,7 +1037,7 @@ class HTMLParser {
 			color = elem.getAttribute( 'color' ) || Drawing.FILL_COLOR,
 			font = elem.getAttribute( 'font' ) || Drawing.FONT;
 
-		fillText( ...Drawing.parseXY( elem, 'point', 'x', 'y' ), text, color, font );
+		window.fillText( ...Drawing.parseXY( elem, 'point', 'x', 'y' ), text, color, font );
 
 	} // HTMLParser.parseTagFILLTEXT
 
@@ -1048,7 +1047,7 @@ class HTMLParser {
 
 		var color = elem.getAttribute( 'color' ) || elem.getAttribute( 'background' );
 
-		clear( color );
+		window.clear( color );
 
 	} // HTMLParser.parseTagCLEAR
 

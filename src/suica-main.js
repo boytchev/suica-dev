@@ -9,7 +9,7 @@ import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 
-import { checkSuicaExists, evaluate, ORIENTATIONS, parseCenter, parseColor, parseNumber } from './suica-globals.js';
+import { ANAGLYPH, checkSuicaExists, evaluate, eventCall, ORIENTATIONS, ORTHOGRAPHIC, parseCenter, parseColor, parseNumber, PERSPECTIVE, STEREO } from './suica-globals.js';
 import { HTMLParser } from './suica-parser.js';
 import { Mesh } from './suica-mesh.js';
 import { Cube } from './suica-cube.js';
@@ -33,19 +33,19 @@ import { AnaglyphEffect, createFSButton, StereoEffect } from './suica-vr.js';
 import { Construct } from './suica-construct.js';
 
 
-
 // control flags
 const DEBUG_CALLS = false;
-const DEBUG_EVENTS = false;
 const TEST_MODE = typeof SUICA_TEST_MODE !== 'undefined';
 
 const SUICA_VERSION = '3.0';
 
 
 // show suica version
-if ( TEST_MODE )
+if ( TEST_MODE ) {
+
 	console.log( '::> suica' );
-else
+
+} else
 	console.log( `(\\/)
 ( ..)
 c(”)(”)		 Suica ${SUICA_VERSION}
@@ -88,8 +88,6 @@ class Suica {
 	// array of all Suicas
 	static allSuicas = [];
 
-	static CIRCLECOUNT = 50; // also cone and cylinder
-
 	// coordinate system orientations
 
 	static globalHoverObject; // used to track mouse enter/leave for Suica objects
@@ -116,18 +114,7 @@ class Suica {
 	static ORBIT = { DISTANCE: 100, ALTITUDE: 30, SPEED: 0 };
 	static TRACKBALL = { DISTANCE: 100, ALTITUDE: 30 };
 	static BACKGROUND = 'whitesmoke';
-	static ANAGLYPH = { DISTANCE: 5 };
-	static STEREO = { DISTANCE: 1 };
-	static PERSPECTIVE = { NEAR: 1, FAR: 1000, FOV: 40 };
-	static ORTHOGRAPHIC = { NEAR: 0, FAR: 1000 };
 	static DEFAULT_ORIENTATION = 'XYZ';
-	static SPLINE = { POINTS: [[ 0, 0, 0 ], [ 0, 1, 0 ]], CLOSED: false, INTERPOLANT: true };
-	static SPLANE = { POINTS: [
-		[[ -3, 0, -3 ], [ -1, 0, -3 ], [ +1, 0, -3 ], [ +3, 0, -3 ]],
-		[[ -3, 0, -1 ], [ -1, 3, -1 ], [ +1, 3, -1 ], [ +3, 0, -1 ]],
-		[[ -3, 0, +1 ], [ -1, 3, +1 ], [ +1, 3, +1 ], [ +3, 0, +1 ]],
-		[[ -3, 0, +3 ], [ -1, 0, +3 ], [ +1, 0, +3 ], [ +3, 0, +3 ]]
-	], CLOSED: [ false, false ], INTERPOLANT: [ true, true ] };
 
 	constructor( suicaTag ) {
 
@@ -439,13 +426,13 @@ class Suica {
 
 
 		// default light
-		this.light = new THREE.SpotLight( 'white', 2.5 );
-		this.light.position.set( 1000, 1500, 3000 );
-		this.light.decay = 0;
+		this.light = new THREE.DirectionalLight( 'white', 0.9*Math.PI );
+		this.light.position.set( 1000, 1571, 3142 );
+		//		this.light.decay = 0;
 		this.scene.add( this.light );
 
 		// ambient light
-		this.scene.add( new THREE.AmbientLight( 'white', 0.5 ) );
+		this.scene.add( new THREE.AmbientLight( 'white', Math.PI-this.light.intensity ) );
 
 		// main animation loop
 		var that = this;
@@ -699,7 +686,7 @@ class Suica {
 	}
 
 
-	anaglyph( distance = Suica.ANAGLYPH.DISTANCE ) {
+	anaglyph( distance = ANAGLYPH.DISTANCE ) {
 
 		this.parser?.parseTags();
 		this.debugCall( 'anaglyph', distance );
@@ -711,7 +698,7 @@ class Suica {
 	}
 
 
-	stereo( distance = Suica.STEREO.DISTANCE ) {
+	stereo( distance = STEREO.DISTANCE ) {
 
 		this.parser?.parseTags();
 		this.debugCall( 'stereo', distance );
@@ -723,7 +710,7 @@ class Suica {
 	}
 
 
-	perspective( near=Suica.PERSPECTIVE.NEAR, far=Suica.PERSPECTIVE.FAR, fov=Suica.PERSPECTIVE.FOV ) {
+	perspective( near=PERSPECTIVE.NEAR, far=PERSPECTIVE.FAR, fov=PERSPECTIVE.FOV ) {
 
 		this.parser?.parseTags();
 		this.debugCall( 'perspective', near, far, fov );
@@ -737,7 +724,7 @@ class Suica {
 	} // Suica.perspective
 
 
-	orthographic( near=Suica.ORTHOGRAPHIC.NEAR, far=Suica.ORTHOGRAPHIC.FAR ) {
+	orthographic( near=ORTHOGRAPHIC.NEAR, far=ORTHOGRAPHIC.FAR ) {
 
 		this.parser?.parseTags();
 		this.debugCall( 'orthographic', near, far );
@@ -1204,29 +1191,6 @@ class Suica {
 	}
 
 
-	static eventCall( object, eventName, eventParam ) {
-
-		// no object
-		if ( !object ) return;
-
-		// no event listener
-		if ( !object[ eventName ]) return;
-
-		// if event listener is a string, it is the name of the listener
-		if ( typeof object[ eventName ] === 'string' || object[ eventName ] instanceof String ) {
-
-			object[ eventName ] = window[ object[ eventName ] ];
-
-		}
-
-		// call the listener
-		object[ eventName ]( eventParam );
-
-		if ( DEBUG_EVENTS ) console.log( object.id+' :: '+eventName );
-
-	}
-
-
 	static onPointerMove( event ) {
 
 		Suica.globalHoverEvent = event;
@@ -1237,20 +1201,20 @@ class Suica {
 
 			if ( object == Suica.hoverObject ) {
 
-				Suica.eventCall( object, 'onpointermove', event );
+				eventCall( object, 'onpointermove', event );
 
 			} else {
 
-				Suica.eventCall( Suica.hoverObject, 'onpointerleave', event );
+				eventCall( Suica.hoverObject, 'onpointerleave', event );
 				Suica.hoverObject = object;
-				Suica.eventCall( Suica.hoverObject, 'onpointerenter', event );
+				eventCall( Suica.hoverObject, 'onpointerenter', event );
 
 			}
 
 		} else {
 
 			Suica.hoverObject = object;
-			Suica.eventCall( Suica.hoverObject, 'onpointerenter', event );
+			eventCall( Suica.hoverObject, 'onpointerenter', event );
 
 		}
 
@@ -1270,16 +1234,16 @@ class Suica {
 
 			if ( object != Suica.hoverObject ) {
 
-				Suica.eventCall( Suica.hoverObject, 'onpointerleave', event );
+				eventCall( Suica.hoverObject, 'onpointerleave', event );
 				Suica.hoverObject = object;
-				Suica.eventCall( Suica.hoverObject, 'onpointerenter', event );
+				eventCall( Suica.hoverObject, 'onpointerenter', event );
 
 			}
 
 		} else {
 
 			Suica.hoverObject = object;
-			Suica.eventCall( Suica.hoverObject, 'onpointerenter', event );
+			eventCall( Suica.hoverObject, 'onpointerenter', event );
 
 		}
 
@@ -1291,7 +1255,7 @@ class Suica {
 		var object = findObject( event, true );
 		if ( object ) {
 
-			Suica.eventCall( object, 'onpointerdown', event );
+			eventCall( object, 'onpointerdown', event );
 
 		}
 
@@ -1305,7 +1269,7 @@ class Suica {
 		var object = findObject( event, true );
 		if ( object ) {
 
-			Suica.eventCall( object, 'onpointerup', event );
+			eventCall( object, 'onpointerup', event );
 
 		}
 
@@ -1318,20 +1282,13 @@ class Suica {
 
 		if ( object ) {
 
-			Suica.eventCall( object, 'onclick', event );
+			eventCall( object, 'onclick', event );
 
 		}
 
-		Suica.eventCall( /*Suica.current*/window.suica, 'onclick', event );
+		eventCall( /*Suica.current*/window.suica, 'onclick', event );
 
 	} // Suica.onClick
-
-
-	static onLoad( object ) {
-
-		Suica.eventCall( object, 'onload', object );
-
-	} // Suica.onLoad
 
 
 	// static onDblClick( event )
@@ -1339,7 +1296,7 @@ class Suica {
 	// var object = findObject( event );
 	// if( object )
 	// {
-	// Suica.eventCall( object, 'ondblclick', event );
+	// eventCall( object, 'ondblclick', event );
 	// }
 	// } // Suica.onDblClick
 
@@ -1465,7 +1422,6 @@ function findObjects( domEvent, onlyInteractive = false ) {
 window.findObjects = findObjects;
 
 
-var allObjects = window.suica?window.suica.allObjects:[];
 
 
 function findObject( domEvent, onlyInteractive = false ) {
@@ -1478,237 +1434,14 @@ function findObject( domEvent, onlyInteractive = false ) {
 
 }
 
-window.findObject = findObject;
-
-
-function spline( points=Suica.SPLINE.POINTS, closed, interpolant ) {
-
-	if ( points instanceof Function ) {
-
-		return function ( t ) {
-
-			return points( t, closed, interpolant );
-
-		};
-
-	}
-
-	// if points is a string - array of points "x,y,z;x,y,z;..."
-	if ( typeof points === 'string' ) {
-
-		if ( points.indexOf( ',' ) >= 0 )
-			points = Suica.evaluate( '[['+points.replaceAll( ';', '],[' )+']]' );
-		else
-			return function ( t ) {
-
-				return window[ points ]( t, closed, interpolant );
-
-			};
-
-	}
-
-	if ( typeof closed === 'undefined' )
-		closed = Suica.SPLINE.CLOSED;
-
-	if ( typeof interpolant === 'undefined' )
-		interpolant = Suica.SPLINE.INTERPOLANT;
-
-	if ( !points.length ) points = Suica.SPLINE.POINTS;
-
-	return function ( t ) {
-
-		// set t in [0,1]
-		if ( t<0 || t>1 ) {
-
-			t = ( ( t%1 )+1 )%1;
-
-		}
-
-		var p = ( points.length-( closed?0:1 ) ) * t;
-		var intPoint = Math.floor( p ),
-			t = p - intPoint,
-			t2 = t*t,
-			t3 = t2*t;
-
-		var p0, p1, p2, p3;
-
-		if ( closed ) {
-
-			p0 = points[ ( intPoint+points.length-1 )%points.length ];
-			p1 = points[ ( intPoint+points.length )%points.length ];
-			p2 = points[ ( intPoint+points.length+1 )%points.length ];
-			p3 = points[ ( intPoint+points.length+2 )%points.length ];
-
-		} else {
-
-			p0 = points[ intPoint === 0 ? intPoint : intPoint-1 ];
-			p1 = points[ intPoint ];
-			p2 = points[ intPoint > points.length-2 ? points.length-1 : intPoint+1 ];
-			p3 = points[ intPoint > points.length-3 ? points.length-1 : intPoint+2 ];
-
-		}
-
-		function catmullRom( p0, p1, p2, p3 ) {
-
-			// var v0 = (p2-p0) * 0.5,
-			//     v1 = (p3-p1) * 0.5;
-			// return (2*p1-2*p2+v0+v1)*t3 + (-3*p1+3*p2-2*v0-v1)*t2 + v0*t + p1;
-			var B0 = ( -t3+2*t2-t )/2,
-				B1 = ( 3*t3-5*t2+2 )/2,
-				B2 = ( -3*t3+4*t2+t )/2,
-				B3 = ( t3-t2 )/2;
-
-			return p0*B0 + p1*B1 + p2*B2 + p3*B3;
-
-		}
-
-		function bSpline( p0, p1, p2, p3 ) {
-
-			var B0 = ( 1-3*t+3*t2-t3 )/6,
-				B1 = ( 4-6*t2+3*t3 )/6,
-				B2 = ( 1+3*t+3*t2-3*t3 )/6,
-				B3 = ( t3 )/6;
-
-			return p0*B0 + p1*B1 + p2*B2 + p3*B3;
-
-		}
-
-		var splineFunction = interpolant ? catmullRom : bSpline;
-
-		var point = [
-			splineFunction( p0[ 0 ], p1[ 0 ], p2[ 0 ], p3[ 0 ]),
-			splineFunction( p0[ 1 ], p1[ 1 ], p2[ 1 ], p3[ 1 ]),
-			splineFunction( p0[ 2 ], p1[ 2 ], p2[ 2 ], p3[ 2 ])
-		];
-
-		if ( typeof p0[ 3 ] !== 'undefined' )
-			point.push( splineFunction( p0[ 3 ], p1[ 3 ], p2[ 3 ], p3[ 3 ]) );
-
-		return point;
-
-	}; // spline.getPoint
-
-} // spline
-
-window.spline = spline;
-
-
-function splane( points=Suica.SPLANE.POINTS, closed, interpolant ) {
-
-	if ( points==null ) points = Suica.SPLANE.POINTS;
-
-	if ( points instanceof Function ) {
-
-		return function ( u, v ) {
-
-			return points( u, v, closed, interpolant );
-
-		};
-
-	}
-
-	// if points is a string - matrix of points "x,y,z;..| x,y,z;..."
-	if ( typeof points === 'string' ) {
-
-		if ( points.indexOf( ',' ) >= 0 )
-			points = Suica.evaluate( '[[['+points.replaceAll( ';', '],[' ).replaceAll( '|', ']],[[' )+']]]' );
-		else {
-
-			return function ( u, v ) {
-
-				console.log( points );
-				console.log( window[ points ]);
-				return window[ points ]( u, v, closed, interpolant );
-
-			};
-
-		}
-
-	}
-
-	if ( typeof closed === 'undefined' )
-		closed = Suica.SPLANE.CLOSED;
-	else
-		if ( !Array.isArray( closed ) )
-			closed = [ closed, false ];
-
-	var uClosed = !!closed[ 0 ], // closed in U direction
-		vClosed = !!closed[ 1 ]; // closed in V direction
-
-	if ( typeof interpolant === 'undefined' )
-		interpolant = Suica.SPLANE.INTERPOLANT;
-	else
-		if ( !Array.isArray( interpolant ) )
-			interpolant = [ interpolant, false ];
-
-	var uInterpolant = !!interpolant[ 0 ], // interpolant in U direction
-		vInterpolant = !!interpolant[ 1 ]; // interpolant in V direction
-
-	if ( !points.length ) points = Suica.SPLANE.POINTS;
-
-	const NU = points[ 0 ].length;
-	const NV = points.length;
-
-	return function ( u, v ) {
-
-		var B = [
-			t => ( 1-3*t+3*t*t-t*t*t )/6,
-			t => ( 4-6*t*t+3*t*t*t )/6,
-			t => ( 1+3*t+3*t*t-3*t*t*t )/6,
-			t => ( t*t*t )/6,
-		];
-
-		if ( uClosed || uInterpolant )
-			u = ( NU+1 )*u-2;	// a-la-bezier & closed
-		else
-			u = ( NU-3 )*u; // transitional
-
-		if ( vClosed || vInterpolant )
-			v = ( NV+1 )*v-2;	// a-la-bezier & closed
-		else
-			v = ( NV-3 )*v;		// transitional
-
-		var uPoint = Math.floor( u ),
-			vPoint = Math.floor( v );
-
-		u = u-uPoint;
-		v = v-vPoint;
-
-		var point = [ 0, 0, 0 ];
-
-		for ( var iv=0; iv<4; iv++ )
-			for ( var iu=0; iu<4; iu++ ) {
-
-				var uIdx, vIdx;
-
-				if ( uClosed )
-					uIdx = ( uPoint+iu+NU )%NU;
-				else
-					uIdx = THREE.MathUtils.clamp( uPoint+iu, 0, NU-1 );
-
-				if ( vClosed )
-					vIdx = ( vPoint+iv+NV )%NV;
-				else
-					vIdx = THREE.MathUtils.clamp( vPoint+iv, 0, NV-1 );
-
-				var weight = B[ iu ]( u ) * B[ iv ]( v );
-
-				point[ 0 ] += weight * points[ vIdx ][ uIdx ][ 0 ];
-				point[ 1 ] += weight * points[ vIdx ][ uIdx ][ 1 ];
-				point[ 2 ] += weight * points[ vIdx ][ uIdx ][ 2 ];
-
-			}
-
-		return point;
-
-	}; // splane.getPoint
-
-} // spline
-
-window.splane = splane;
 
 
 window.shape = shape;
+window.findObject = findObject;
+
+
+
+
 
 
 
@@ -1771,4 +1504,4 @@ for( var i=0; i<htmlSuicas.length; i++ )
 }
 */
 
-export { Suica, spline, splane, allObjects };
+export { Suica };

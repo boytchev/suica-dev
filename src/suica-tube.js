@@ -6,8 +6,7 @@
 
 import * as THREE from 'three';
 import { Mesh } from './suica-mesh.js';
-import { spline, Suica } from './suica-main.js';
-import { cloneEvents, parseCenter, parseColor, parseNumber, parseSize } from './suica-globals.js';
+import { cloneEvents, parseCenter, parseColor, parseNumber, parseSize, spline } from './suica-globals.js';
 
 
 // converts Suica spline, array of points or a path function into a THREE.Curve
@@ -266,7 +265,7 @@ class Tube extends Mesh {
 
 	set radius( radius ) {
 
-		radius = Suica.parseNumber( radius );
+		radius = parseNumber( radius );
 		this._radius = radius;
 		this.threejs.geometry.parameters.radius = radius;
 		this.threejs.geometry.update( new SuicaCurve( this._curve ) );

@@ -6,8 +6,7 @@
 
 import * as THREE from 'three';
 import { Mesh } from './suica-mesh.js';
-import { Suica } from './suica-main.js';
-import { cloneEvents, parseCenter, parseColor, parseSize, random } from './suica-globals.js';
+import { CIRCLECOUNT, cloneEvents, parseCenter, parseColor, parseSize, random } from './suica-globals.js';
 
 
 
@@ -25,7 +24,7 @@ class Sphere extends Mesh {
 
 		if ( !suica._.solidGeometry.sphere ) {
 
-			suica._.solidGeometry.sphere = suica.flipNormal( new THREE.SphereGeometry( 0.5, Suica.CIRCLECOUNT, Math.round( Suica.CIRCLECOUNT/2 ) ).applyMatrix4( suica.orientation.MATRIX ) );
+			suica._.solidGeometry.sphere = suica.flipNormal( new THREE.SphereGeometry( 0.5, CIRCLECOUNT, Math.round( CIRCLECOUNT/2 ) ).applyMatrix4( suica.orientation.MATRIX ) );
 
 		}
 

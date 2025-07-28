@@ -6,8 +6,7 @@
 
 import * as THREE from 'three';
 import { Mesh } from './suica-mesh.js';
-import { Suica } from './suica-main.js';
-import { cloneEvents, parseCenter, parseColor, parseNumber, parseSize, random } from './suica-globals.js';
+import { CIRCLECOUNT, cloneEvents, parseCenter, parseColor, parseNumber, parseSize, random } from './suica-globals.js';
 
 
 class Polygon extends Mesh {
@@ -20,7 +19,7 @@ class Polygon extends Mesh {
 	constructor( suica, count, center, size, color ) {
 
 		suica.parser?.parseTags();
-		if ( count < Suica.CIRCLECOUNT )
+		if ( count < CIRCLECOUNT )
 			suica.debugCall( 'polygon', count, center, size, color );
 		else
 			suica.debugCall( 'circle', center, size, color );
@@ -135,7 +134,7 @@ class Circle extends Polygon {
 
 	constructor( suica, center, size, color ) {
 
-		super( suica, Suica.CIRCLECOUNT, center, size, color );
+		super( suica, CIRCLECOUNT, center, size, color );
 
 	}
 

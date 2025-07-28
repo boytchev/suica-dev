@@ -6,8 +6,7 @@
 
 import * as THREE from 'three';
 import { Mesh } from './suica-mesh.js';
-import { Suica } from './suica-main.js';
-import { cloneEvents, parseCenter, parseColor, parseNumber, parseSize } from './suica-globals.js';
+import { CIRCLECOUNT, cloneEvents, parseCenter, parseColor, parseNumber, parseSize } from './suica-globals.js';
 
 
 class Pyramid extends Mesh {
@@ -175,7 +174,7 @@ class Cone extends Pyramid {
 
 	constructor( suica, center, size, color ) {
 
-		super( suica, Suica.CIRCLECOUNT, center, size, color, false );
+		super( suica, CIRCLECOUNT, center, size, color, false );
 
 	}
 

@@ -8,8 +8,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
 import { Mesh } from './suica-mesh.js';
-import { allObjects, Suica } from './suica-main.js';
-import { cloneEvents, parseCenter, parseSize } from './suica-globals.js';
+import { allObjects, cloneEvents, onLoad, parseCenter, parseSize } from './suica-globals.js';
 
 
 class Model extends Mesh {
@@ -88,15 +87,18 @@ class Model extends Mesh {
 
 			function noMetal( child ) {
 
-				if ( child.isMesh ) child.material.metalness = 0;
-				if ( child.children.lenhth ) child.traverse( noMetal );
+				if ( child.isMesh ) {
+
+					child.material.metalness = 0;
+
+				}
 
 			}
 
 			replaceObject( object );
 			that.ready = true;
 
-			Suica.onLoad( that );
+			onLoad( that );
 
 			// check whether the objects are waiting for the same model
 			for ( var waiting of that.waitingList ) {

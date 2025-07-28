@@ -6,9 +6,8 @@
 
 import * as THREE from 'three';
 import { Mesh } from './suica-mesh.js';
-import { splane } from './suica-main.js';
 import { Tube } from './suica-tube.js';
-import { cloneEvents, parseCenter, parseColor, parseSize } from './suica-globals.js';
+import { cloneEvents, parseCenter, parseColor, parseSize, splane } from './suica-globals.js';
 
 
 

@@ -266,6 +266,7 @@ class Mesh {
 		if ( drawing instanceof THREE.Texture ) {
 
 			this.threejs.material.map = drawing; // no cloning available
+			this.threejs.material.map.colorSpace = THREE.SRGBColorSpace;
 			this.threejs.material.transparent = true;
 			this.threejs.material.side = /*2025TwoPass2025*/THREE.DoubleSide;
 			this.threejs.material.needsUpdate = true;
