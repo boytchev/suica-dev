@@ -35,11 +35,13 @@
 				random( colors )
 			).style( { spin: [ random( 0, 360 ), random( 0, 360 ), random( 0, 360 ) ] } );
 		
-		function onClick( event ) 		{
-
+		function onClick( event )
+		{
 			for ( var object of findObjects( event ) )
 				object.color = 'dimgray';
 		}
+		
 	</script>
+	
 </body>
 </html>

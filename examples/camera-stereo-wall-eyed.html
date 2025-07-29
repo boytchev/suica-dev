@@ -25,20 +25,20 @@
 	</suica>
 	
 	<script>
+	
 		var cubes = [];
 		var grid = 5;
 		
 		for ( var x = -3; x<=3; x++ )
-		for ( var y = -3; y<=3; y++ ) 		{
-
-				cubes.push( cube([ grid*x, grid*y, 0 ], grid-1, random([ 'dimgray', 'linen', 'lightsalmon', 'peachpuff' ]) ) );
-		}
+		for ( var y = -3; y<=3; y++ )
+			cubes.push( cube([ grid*x, grid*y, 0 ], grid-1, random([ 'dimgray', 'linen', 'lightsalmon', 'peachpuff' ]) ) );
 		
-		function onTime( t ) 		{
-
+		function onTime( t )
+		{
 			for ( var i=0; i<cubes.length; i++ )
 				cubes[ i ].depth = grid + 40 + 60*Math.sin( 5*t+i*i );
 		}
+		
 	</script>
 	
 </body>

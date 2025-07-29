@@ -49,16 +49,18 @@
 	</suica>
 
 	<script>
-		function randomize() 		{
-
+	
+		function randomize()
+		{
 			var cubes = document.getElementsByTagName( 'cube' );
-			for ( var cube of cubes ) {
-
+			for ( var cube of cubes )
+			{
 				cube.setAttribute( 'size', 10+10*Math.random() );
 				cube.setAttribute( 'color', random([ 'dimgray', 'linen' ]) );
-		
-	}
+			}
 		}
+		
 	</script>
+	
 </body>
 </html>

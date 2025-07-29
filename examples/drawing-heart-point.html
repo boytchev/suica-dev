@@ -26,6 +26,7 @@
 	</suica>
 	
 	<script>
+	
 		var heart = drawing( 128 );
 
 		moveTo( 64, 8 );
@@ -47,13 +48,12 @@
 		const N = 200;
 		
 		// creating all points
-		for ( var i=0; i<N; i++ ) 		{
-
+		for ( var i=0; i<N; i++ )
+		{
 			var center = [ random( -50, 50 ), random( -30, 30 ), random( -50, 50 ) ];
 			point( center, random( 5, 25 ), random( colors ) ).image = heart;
 		}
-		
-		
+				
 	</script>
 	
 </body>

@@ -29,21 +29,22 @@
 	</suica>
 
 	<script>
+	
 		// an array of tile colors
 		var color = [ 'linen', 'peachpuff', 'lightsalmon', 'dimgray' ];
 		
 		// create floor and ceiling
 		for ( x = -80; x<=80; x+=10 )
-		for ( z = -40; z<=40; z+=10 ) 		{
-
-				cube([ x, -10, z ], [ 9, 0.2, 9 ], random( color ) );
-				cube([ x, 10, z ], [ 9, 0.2, 9 ], random( color ) );
+		for ( z = -40; z<=40; z+=10 )
+		{
+			cube([ x, -10, z ], [ 9, 0.2, 9 ], random( color ) );
+			cube([ x, 10, z ], [ 9, 0.2, 9 ], random( color ) );
 		}
 		
 		// calculates point on Lemniscate of Bernoulli
 		// https://en.wikipedia.org/wiki/Lemniscate_of_Bernoulli
-		function lemniscate( t ) 		{
-
+		function lemniscate( t )
+		{
 			var sin = Math.sin( t ),
 				cos = Math.cos( t );
 		
@@ -54,10 +55,12 @@
 		}
 
 		// dynamic lookAt
-		function onTime( t ) 		{
-
+		function onTime( t )
+		{
 			lookAt( lemniscate( t/2 ), lemniscate( t/2+0.3 ) );
 		}
+		
 	</script>
+	
 </body>
 </html>

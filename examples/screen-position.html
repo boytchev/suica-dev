@@ -33,10 +33,11 @@
 	</suica>
 
 	<script>
+	
 		var pos;
 		
-		function onTime( t ) 		{
-
+		function onTime( t )
+		{
 			pos = x.screenPosition();
 			element( 'label-x' ).style.left = pos[ 0 ]+'px';
 			element( 'label-x' ).style.top = pos[ 1 ]+'px';
@@ -51,6 +52,8 @@
 			element( 'label-z' ).style.left = pos[ 0 ]+'px';
 			element( 'label-z' ).style.top = pos[ 1 ]+'px';
 		}
+		
 	</script>
+	
 </body>
 </html>

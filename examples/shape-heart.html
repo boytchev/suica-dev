@@ -26,6 +26,7 @@
 	</suica>
 	
 	<script>
+	
 		var heart = shape( );
 
 		moveTo( 0, -56 );
@@ -38,8 +39,8 @@
 
 		var colors = [ 'linen', 'peachpuff', 'lightsalmon', 'gray', 'black', 'white' ];
 		
-		for ( var v of heart.vertices ) 		{
-
+		for ( var v of heart.vertices )
+		{
 			cylinder( v, [ 5, 50, 5 ], random( colors ) );
 			its.spinV = 90;
 		}

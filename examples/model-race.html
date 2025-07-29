@@ -65,10 +65,11 @@
 	</suica>
 
 	<script>
+	
 		var slope = spline([[ 20 ], [ 100 ], [ 20 ], [ 0 ], [ 20 ], [ 100 ], [ 20 ], [ 0 ]], true, false );
 		
-		function race( t ) 		{
-
+		function race( t )
+		{
 			t = -t/10;
 		
 			var p;
@@ -86,6 +87,8 @@
 			c.spinH = 90+degrees( Math.atan2( p[ 0 ]-c.center[ 0 ], p[ 2 ]-c.center[ 2 ]) );
 			c.spinV = slope( 3.1*t )[ 0 ];
 		}
+		
 	</script>
+	
 </body>
 </html>

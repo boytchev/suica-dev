@@ -33,24 +33,23 @@
 	</suica>
 	
 	<script>
-		function pick( event ) 		{
-
+	
+		function pick( event )
+		{
 			this.speed = 200;
 		}
 		
-		function rotate( t, dT ) 		{
-
-			for ( var object of allObjects() ) {
-
+		function rotate( t, dT )
+		{
+			for ( var object of allObjects() )
 				object.spinH += ( object.speed|0 )*dT;
-		
-	}
 		}
 		
-		function drop( event ) 		{
-
+		function drop( event )
+		{
 			this.speed = 0;
 		}
+		
 	</script>
 </body>
 </html>

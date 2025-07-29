@@ -37,24 +37,22 @@
 	</suica>
 
 	<script>
+	
 		var spaceships = [];
 		for ( var x=-20; x<=20; x+=40 )
 		for ( var y=-20; y<=20; y+=40 )
 		for ( var z=-20; z<=20; z+=40 )
-					spaceships.push( template.clone.style( { hidden: false, center: [ x, y, z ] } ) );
+			spaceships.push( template.clone.style( { hidden: false, center: [ x, y, z ] } ) );
 
-
-		
-		function loop( t, dT ) 		{
-
+		function loop( t, dT )
+		{
 			target.center = [ 10*Math.sin( 3*t+1 ), 10*Math.sin( 2*t-6 ), 10*Math.sin( 3*t+3 ) ];
 
-			for ( var spaceship of spaceships ) {
-
+			for ( var spaceship of spaceships )
 				spaceship.lookAt( target );
-		
-	}
 		}
+		
 	</script>
+	
 </body>
 </html>

@@ -26,7 +26,9 @@
 	</suica>
 
 	<script>
+	
 		var points = [];
+		
 		for ( var i=0; i<20; i++ )
 			points.push([
 				random( -30, 30 ),
@@ -36,6 +38,8 @@
 			]);
 		
 		tube([ 0, 0, 0 ], spline( points, true ), 0, [ 600, 8 ], 1, 'black' );
+		
 	</script>
+	
 </body>
 </html>

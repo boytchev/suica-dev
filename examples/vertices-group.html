@@ -38,14 +38,14 @@
 	</suica>
 
 	<script>
-		for ( var pnt of pawn.vertices ) 		{
-
+	
+		for ( var pnt of pawn.vertices )
+		{
 			clone.add( point( pnt, 5, random([ 'black', 'lightsalmon', 'white' ]) ) );
 		}
-
-		
-		function onTime( t ) 		{
-
+	
+		function onTime( t )
+		{
 			pawn.spinH = 50*t;
 			pawn.spinV = 80*t;
 			pawn.spinT = 180*t;
@@ -56,5 +56,6 @@
 		}
 		
 	</script>
+	
 </body>
 </html>

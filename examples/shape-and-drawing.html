@@ -24,7 +24,6 @@
 	<suica></suica>
 	
 	<script>
-//		demo();
 		
 		var pic = drawing( 64, 64, 'lightgray' );
 		moveTo( 22, 32 );
@@ -51,24 +50,23 @@
 		for ( var i = 0; i<n; i++ ) line( v[ i ], v[ ( i+1 )%n ]);
 		
 		var cubes = [];
-		for ( var i=0; i<10; i++ ) 		{
-
+		for ( var i=0; i<10; i++ )
+		{
 			cubes.push( a.clone );
 			its.center = v[ Math.round( i/10*n ) ];
 		}
 		
 		a.visible = false;
 		
-		suica.ontime = function ( t ) 		{
-
-			for ( var i =0; i<10; i++ ) {
-
+		suica.ontime = function ( t )
+		{
+			for ( var i =0; i<10; i++ )
+			{
 				cubes[ i ].center = v[ Math.round( i/10*n+50*t )%n ];
 				cubes[ i ].spinH = 20*i+200*t;
-		
-	}
-		
+			}
 		};
+		
 	</script>
 	
 </body>

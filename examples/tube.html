@@ -26,8 +26,9 @@
 	</suica>
 
 	<script>
-		function torus( u ) 		{
-
+	
+		function torus( u )
+		{
 			u = 2*Math.PI*u;
 			return [
 				0,
@@ -36,8 +37,8 @@
 			];
 		}
 		
-		function screw( u ) 		{
-
+		function screw( u )
+		{
 			return [
 				80*u-40,
 				10*Math.sin( 60*u ),
@@ -50,5 +51,6 @@
 		tube([ 0, 0, 0 ], screw, 2, 400 );
 		
 	</script>
+	
 </body>
 </html>

@@ -24,4 +24,20 @@ export default [
 		],
   },
 
+	{
+		input: './src/suica.js',
+		output: {
+			file: './dist/suica.min2.js',
+			format: 'es',
+			banner: `/* suica v${pkg.version}*/\n\n\n`,
+		},
+		external: [
+		],
+		plugins: [
+			nodeResolve(), // Resolves node_modules dependencies like 'three'
+			commonjs(), // Converts UMD/CommonJS to ES Modules
+			terser(),
+		],
+  },
+
 ];

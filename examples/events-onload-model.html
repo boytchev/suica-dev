@@ -35,9 +35,10 @@
 	</suica>
 
 	<script>
+	
 		var angle = 36;
-		for ( var obj of allObjects() ) 		{
-
+		for ( var obj of allObjects() )
+		{
 			angle += 360/5;
 		
 			obj.x = 35*Math.cos( radians( angle ) );
@@ -47,30 +48,30 @@
 			obj.spinV = random( -180, 180 );
 		}
 		
-		function boundingBox( object ) 		{
-
+		function boundingBox( object )
+		{
 			var min = [ Infinity, Infinity, Infinity ],
 				max = [ -Infinity, -Infinity, -Infinity ],
 				center = [ 0, 0, 0 ],
 				size = [ 0, 0, 0 ];
 		
-			for ( var i=0; i<3; i++ ) {
-
-				for ( var v of object.vertices ) {
-
+			for ( var i=0; i<3; i++ )
+			{
+				for ( var v of object.vertices )
+				{
 					min[ i ] = Math.min( min[ i ], v[ i ]);
 					max[ i ] = Math.max( max[ i ], v[ i ]);
-		
-		}
+				}
 		
 				center[ i ] = min[ i ]/2 + max[ i ]/2;
 				size[ i ] = max[ i ]-min[ i ];
-		
-	}
+			}
 		
 			cube( center, size, 'black' );
 			its.wireframe = true;
 		}
+		
 	</script>
+	
 </body>
 </html>

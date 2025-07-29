@@ -28,11 +28,12 @@
 	</suica>
 	
 	<script>
+	
 		a.image = drawing( 300, 100 );
 		b.image = drawing( 300, 100 );
 		
-		function onTime( t ) 		{
-
+		function onTime( t )
+		{
 			a.image.clear( 'lightsalmon' );
 			a.image.fillText( 18, 20, ( new Date() ).toTimeString(), 'black', 'bold 66px Arial' );
 			a.spin = [ 100*t - 50*Math.sin( 100*t*Math.PI/180 ) ];

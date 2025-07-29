@@ -34,16 +34,16 @@
 
 		var cubes = document.getElementsByTagName( 'cube' );
 
-		setInterval( function () 		{
-
-			for ( var cube of cubes ) {
-
+		setInterval( function ()
+		{
+			for ( var cube of cubes )
+			{
 				cube.setAttribute( 'size', 10+10*Math.random() );
 				cube.setAttribute( 'color', random([ 'dimgray', 'linen' ]) );
-		
-	}
+			}
 		}, 500 );
 		
 	</script>
+	
 </body>
 </html>

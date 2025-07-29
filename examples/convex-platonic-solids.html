@@ -26,6 +26,7 @@
 	</suica>
 
 	<script>
+	
 		// tetrahedron
 		convex([[ 1, 1, 1 ], [ 1, -1, -1 ], [ -1, 1, -1 ], [ -1, -1, 1 ]], 10, 'lightsalmon' );
 		its.x = -40;
@@ -49,11 +50,13 @@
 
 		platonic = allObjects();
 		
-		function spinSolids( t ) 		{
-
+		function spinSolids( t )
+		{
 			for ( var i in platonic )
 				platonic[ i ].spin = [ 100*t, ( 110-8*i )*t, ( 120-5*i )*t ];
 		}
+		
 	</script>
+	
 </body>
 </html>

@@ -2,11 +2,22 @@
 <html lang="en">
 
 <head>
-	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-	<script src="../test.js"></script>
+	<title>Trackball orientation</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="logo.png"/>
+	<link rel="stylesheet" href="examples.css">
+	
+	<script src="suica.js"></script>
 </head>
 
 <body>
+
 	<suica orientation="xyz">
 		<oxyz>
 		<trackball altitude="20">
@@ -14,8 +25,9 @@
 		<point id="x" x="32" size="12" color="white">
 		<point id="y" y="32" size="12" color="white">
 		<point id="z" z="32" size="12" color="white">
-		<div>XYZ</div>
 	</suica>
+	
+	<div>XYZ</div>
 
 	<script>
 
@@ -33,5 +45,6 @@
 		z.image = iz;
 		
 	</script>
+	
 </body>
 </html>

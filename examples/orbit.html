@@ -28,10 +28,11 @@
 	</suica>
 	
 	<script>
+	
 		var colors = [ 'lightsalmon', 'linen', 'peachpuff', 'white', 'black', 'gray', 'dimgray' ];
 		
-		for ( var i=0; i<360; i+=5 ) 		{
-
+		for ( var i=0; i<360; i+=5 )
+		{
 			cube([ 35*Math.cos( radians( i ) ), 0, 35*Math.sin( radians( i ) ) ], 2, random( colors ) );
 			its.spinH = -i;
 
@@ -43,6 +44,8 @@
 			its.spinH = 0;
 			its.spinV = i;
 		}
+		
 	</script>
+	
 </body>
 </html>

@@ -27,18 +27,19 @@
 	</suica>
 
 	<script>
+	
 		var tentacles = [];
 
-		for ( var i=0; i<21; i++ ) 		{
-
+		for ( var i=0; i<21; i++ )
+		{
 			tentacles[ i ] = tube();
 			tentacles[ i ].color = 'dimgray';
 		}
 		
-		suica.ontime = function ( t ) 		{
-
-			for ( var i in tentacles ) {
-
+		suica.ontime = function ( t )
+		{
+			for ( var i in tentacles )
+			{
 				t = t+i*i;
 		
 				var alpha = 2*Math.PI*Math.sin( 1.73*t/15 );
@@ -64,9 +65,10 @@
 				];
 
 				tentacles[ i ].curve = tentacle;
-		
-	}
+			}
 		};
+		
 	</script>
+	
 </body>
 </html>

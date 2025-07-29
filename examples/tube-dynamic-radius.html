@@ -26,8 +26,9 @@
 	</suica>
 
 	<script>
-		function screw( u ) 		{
-
+	
+		function screw( u )
+		{
 			var r = 10+10*Math.cos( 6*u-3 );
 
 			return [
@@ -39,10 +40,12 @@
 		
 		spiral = tube([ 0, 0, 0 ], screw, 1, 600 );
 		
-		suica.ontime = function ( t ) 		{
-
+		suica.ontime = function ( t )
+		{
 			spiral.radius = 3+2.8*Math.sin( 4*t );
 		};
+		
 	</script>
+	
 </body>
 </html>

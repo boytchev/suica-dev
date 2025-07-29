@@ -28,11 +28,12 @@
 	</suica>
 	
 	<script>
+	
 		a.image = drawing( 100, 100, 'linen' );
 		b.image = drawing( 100, 100, 'linen' );
 		
-		function onTime( ) 		{
-
+		function onTime( )
+		{
 			a.image.arc( random( 0, 100 ), random( 0, 100 ), random( 10, 30 ) );
 			a.image.stroke( 'black', 5 );
 			a.image.fill( random([ 'peachpuff', 'linen', 'white', 'lightgray', 'lightsalmon' ]) );
@@ -41,6 +42,7 @@
 			b.image.lineTo( random( -10, 110 ), random( -10, 110 ) );
 			b.image.stroke( random([ 'peachpuff', 'linen', 'white', 'lightgray', 'lightsalmon', 'black', 'dimgray' ]), 1 );
 		}
+		
 	</script>
 	
 </body>

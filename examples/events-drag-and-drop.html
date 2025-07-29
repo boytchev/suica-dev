@@ -29,31 +29,33 @@
 	</suica>
 	
 	<script>
+	
 		var activeObject, oldX, oldY;
 		
-		function pick( event ) 		{
-
+		function pick( event )
+		{
 			activeObject = findObject( event );
 			oldX = event.clientX;
 			oldY = event.clientY;
 		}
 		
-		function drag( event ) 		{
-
-			if ( activeObject ) {
-
+		function drag( event )
+		{
+			if ( activeObject )
+			{
 				activeObject.x += event.clientX-oldX;
 				activeObject.y -= event.clientY-oldY;
 				oldX = event.clientX;
 				oldY = event.clientY;
-		
-	}
+			}
 		}
 		
-		function drop( event ) 		{
-
+		function drop( event )
+		{
 			activeObject = null;
 		}
+		
 	</script>
+	
 </body>
 </html>

@@ -27,20 +27,22 @@
 	</suica>
 
 	<script>
-		function centerText( object ) 		{
-
+	
+		function centerText( object )
+		{
 			var min = Infinity,
 				max = -Infinity;
 		
-			for ( var v of object.vertices ) {
-
+			for ( var v of object.vertices )
+			{
 				min = Math.min( min, v[ 0 ]);
 				max = Math.max( max, v[ 0 ]);
-		
-	}
+			}
 		
 			object.x = -( min + max )/2;
 		}
+		
 	</script>
+	
 </body>
 </html>

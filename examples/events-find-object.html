@@ -25,6 +25,7 @@
 	</suica>
 	
 	<script>
+	
 		var n = 40,
 			colors = [ 'peachpuff', 'lightsalmon', 'lightgray', 'white' ];
 		
@@ -35,11 +36,13 @@
 				random( colors )
 			).style( { spin: [ random( 0, 360 ), random( 0, 360 ), random( 0, 360 ) ] } );
 		
-		function onClick( event ) 		{
-
+		function onClick( event )
+		{
 			var object = findObject( event );
 			if ( object ) object.color = 'dimgray';
 		}
+		
 	</script>
+	
 </body>
 </html>

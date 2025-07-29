@@ -25,10 +25,11 @@
 	</suica>
 
 	<script>
+	
 		var time = 0;
 		
-		function screw( u ) 		{
-
+		function screw( u )
+		{
 			return [
 				80*u-40,
 				20*Math.sin( 40*u ),
@@ -39,11 +40,13 @@
 		
 		spiral = tube([ 0, 0, 0 ], screw, 1, 400 );
 		
-		suica.ontime = function ( t ) 		{
-
+		suica.ontime = function ( t )
+		{
 			time = t;
 			spiral.radius = 0; // activates recalculation of the tube
 		};
+		
 	</script>
+	
 </body>
 </html>

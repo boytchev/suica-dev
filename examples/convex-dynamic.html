@@ -26,20 +26,18 @@
 	</suica>
 
 	<script>
-		function r() 		{
-
+	
+		function r()
+		{
 			return THREE.MathUtils.randInt( -6, 6 );
 		}
 
-		function randomPoints() 		{
-
+		function randomPoints()
+		{
 			var points = [];
-			for ( var i=0; i<40; i++ ) {
-
+			for ( var i=0; i<40; i++ )
 				points.push([ r(), r(), r() ]);
-		
-	}
-
+				
 			return points;
 		}
 		
@@ -50,5 +48,6 @@
 		setInterval( ()=>its.src=randomPoints(), 2000 );
 		
 	</script>
+	
 </body>
 </html>

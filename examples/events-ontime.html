@@ -41,12 +41,15 @@
 	</suica>
 	
 	<script>
+	
 		suica.ontime = showTime;
 		
-		function showTime( t, dt ) 		{
-
+		function showTime( t, dt )
+		{
 			element( 'log' ).innerHTML = `Time: ${t.toFixed( 1 )} &Delta;Time: ${dt.toFixed( 4 )}`;
 		}
+		
 	</script>	
+	
 </body>
 </html>

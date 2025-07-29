@@ -32,6 +32,7 @@
 	</suica>
 	
 	<script>
+	
 		a.threejs.material = new THREE.MeshStandardMaterial( {
 			color: 'lightsalmon',
 			metalness: 0.8,
@@ -75,13 +76,12 @@
 			emissiveIntensity: 0.1,
 			emissive: 'lime',
 			opacity: 1,
-			//transparent: !true
 		} );
 		d.threejs.material.bumpMap.repeat.set( 20, 10 );
 		d.threejs.material.bumpMap.colorSpace = THREE.NoColorSpace;
 
-		function spin( t ) 		{
-
+		function spin( t )
+		{
 			c.y = 26*Math.sin( 3*t );
 			c.z = 26*Math.cos( 3*t );
 		
@@ -89,6 +89,8 @@
 			d.z = -c.z;
 			d.spinV = -360*t;
 		}
+		
 	</script>
+	
 </body>
 </html>

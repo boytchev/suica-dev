@@ -29,17 +29,19 @@
 	</suica>
 
 	<script>
+	
 		curve = spline([ a.center, b.center, c.center, d.center ], true, false );
 		color = spline([ a.color, b.color, c.color, d.color ], true, true );
 		
 		s = circle([ 0, 0, 0 ], 20, 'lightsalmon' );
 		
-		suica.ontime = function ( t ) 		{
-
+		suica.ontime = function ( t )
+		{
 			s.center = curve( t/5 );
 			s.color = color( t/5 );
 		};
 		
 	</script>
+	
 </body>
 </html>

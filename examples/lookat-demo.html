@@ -47,14 +47,17 @@
 	</suica>
 
 	<script>
-		function onTime( t ) 		{
-
+	
+		function onTime( t )
+		{
 			var h = Math.cos( 2*t+0.5 ),
 				s = Math.sin( t ),
 				c = Math.cos( t );
 		
 			lookAt([ 100*c, 30*h, 100*s ]);
 		}
+		
 	</script>
+	
 </body>
 </html>

@@ -51,8 +51,9 @@
 	</suica>
 	
 	<script>
-		function tick( t ) 		{
-
+	
+		function tick( t )
+		{
 			element( 'time' ).innerHTML = t.toFixed( 1 );
 			if ( typeof device != 'undefined' ) {
 
@@ -60,9 +61,9 @@
 				element( 'acc' ).innerHTML = device.relativeAcceleration.x+' '+device.relativeAcceleration.y+' '+device.relativeAcceleration.z;
 				element( 'vel' ).innerHTML = device.relativeVelocity.x+' '+device.relativeVelocity.y+' '+device.relativeVelocity.z;
 				element( 'pos' ).innerHTML = device.relativePosition.x+' '+device.relativePosition.y+' '+device.relativePosition.z;
-		
-	}
+			}
 		}
+		
 	</script>
 	
 </body>

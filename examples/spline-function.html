@@ -26,8 +26,9 @@
 	</suica>
 
 	<script>
-		function flower( u, k, n=2 ) 		{
-
+	
+		function flower( u, k, n=2 )
+		{
 			u = n*Math.PI*u;
 			return [
 				Math.cos( u ) + Math.cos( k*u ),
@@ -36,8 +37,8 @@
 			];
 		}
 		
-		function frame( u, n ) 		{
-
+		function frame( u, n )
+		{
 			u = 2*Math.PI*u;
 			return [
 				8*Math.pow( Math.abs( Math.cos( u ) ), 2/n )*Math.sign( Math.cos( u ) ),
@@ -58,5 +59,6 @@
 		tube([ 0, 0, 0 ], spline( frame, 5 ), 0.05, [ 400, 6 ], 5, 'lightsalmon' );
 
 	</script>
+	
 </body>
 </html>

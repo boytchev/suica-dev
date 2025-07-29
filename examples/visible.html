@@ -28,17 +28,20 @@
 	</suica>
 	
 	<script>
+	
 		for ( var y=-15; y<=15; y+=10 )
 		for ( var s=15*( y%2 ); s<360; s+=30 )
-				a.clone.style( { y: y, spin: s, color: random([ 'black', 'linen', 'gray', 'peachpuff', 'white', 'dimgray', 'lightsalmon', 'lightgray' ]) } );
+			a.clone.style( { y: y, spin: s, color: random([ 'black', 'linen', 'gray', 'peachpuff', 'white', 'dimgray', 'lightsalmon', 'lightgray' ]) } );
 		
 		setInterval( toggle, 1000 );
 		
-		function toggle( ) 		{
-
+		function toggle( )
+		{
 			for ( var obj of allObjects() )
 				obj.visible = random([ true, false ]);
 		}
+		
 	</script>
+	
 </body>
 </html>

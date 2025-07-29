@@ -98820,3 +98820,5 @@ window.THREE = THREE;
 // old: Capture( suica, name, time, fps, format, skipFrames )
 // new: Capture( suica, name, time, fps, format, skipTime ) - times in seconds
 // based on slightly modified https://github.com/manthrax/THREE-CSGMesh
+//
+// check device.js from suica 2 and the device-orientation example

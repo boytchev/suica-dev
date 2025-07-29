@@ -39,12 +39,14 @@
 		surface([ 0, 0, 0 ], s );
 		
 		for ( var i=0; i<4; i++ )
-		for ( var j=0; j<4; j++ ) 		{
-
-				sphere( p[ j ][ i ], 2, 'black' );
-				if ( j<3 ) line( p[ j ][ i ], p[ j+1 ][ i ], 'black' );
-				if ( i<3 ) line( p[ j ][ i ], p[ j ][ i+1 ], 'black' );
+		for ( var j=0; j<4; j++ )
+		{
+			sphere( p[ j ][ i ], 2, 'black' );
+			if ( j<3 ) line( p[ j ][ i ], p[ j+1 ][ i ], 'black' );
+			if ( i<3 ) line( p[ j ][ i ], p[ j ][ i+1 ], 'black' );
 		}
+		
 	</script>
+	
 </body>
 </html>

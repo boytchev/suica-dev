@@ -33,17 +33,20 @@
 	</suica>
 
 	<script>
+	
 		for ( var x=-50; x<=50; x+=25 )
 		for ( var z=-50; z<=50; z+=25 )
-				if ( x || z )
-					pawn.clone.style( { center: [ x, 0, z ] } );
+			if ( x || z )
+				pawn.clone.style( { center: [ x, 0, z ] } );
 
-		function shrink( ) 		{
-
+		function shrink( )
+		{
 			this.color = 'dimgray';
 			this.size = [ 0.5, 0.5, 0.5 ];
 			this.removeEventListener( 'onclick' );
 		}
+		
 	</script>
+	
 </body>
 </html>

@@ -38,6 +38,7 @@
 	</suica>
 	
 	<script>
+	
 		result = scorm.api ? 'SCORM API 1.2 is found and initialized' : 'SCORM API 1.2 is not found';
 		
 		panel_1.image = drawing( 1024, 128, 'linen' );
@@ -56,10 +57,11 @@
 		panel_3.image.fillText( 10, 80, 'Student Name:', 'black', 'bold 48px Arial' );
 		panel_3.image.fillText( 10, 14, result, 'black', '48px Arial' );
 		
-		function spin( t ) 		{
-
+		function spin( t )
+		{
 			obj.spin = [ 50*t, 47*t, 43*t ];
 		}
+		
 	</script>
 	
 </body>

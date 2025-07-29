@@ -31,11 +31,12 @@
 	</suica>
 
 	<script>
+	
 		var lines = [];
 		for ( var i=0; i<8; i++ ) lines.push( line() );
 		
-		function onTime( t ) 		{
-
+		function onTime( t )
+		{
 			a.spinH = 10*Math.sin( 0.8*t );
 			a.spinV = 10*Math.sin( 1.1*t );
 			a.spinT = 10*Math.cos( 0.7*t );
@@ -47,15 +48,16 @@
 			var i = 0;
 		
 			for ( x=-1; x<=1; x+=2 )
-				for ( y=-1; y<=1; y+=2 )
-					for ( z=-1; z<=1; z+=2 ) {
-
-						lines[ i ].from = a.objectPosition([ 20*x, 20*y, 20*z ]);
-						lines[ i ].to = b.objectPosition([ 10*x, 10*y, 10*z ]);
-						i++;
-		
-					}
+			for ( y=-1; y<=1; y+=2 )
+			for ( z=-1; z<=1; z+=2 )
+			{
+				lines[ i ].from = a.objectPosition([ 20*x, 20*y, 20*z ]);
+				lines[ i ].to = b.objectPosition([ 10*x, 10*y, 10*z ]);
+				i++;
+			}
 		}
+		
 	</script>
+	
 </body>
 </html>

@@ -26,8 +26,9 @@
 	</suica>
 
 	<script>
-		function roundedSquare( u, n ) 		{
-
+	
+		function roundedSquare( u, n )
+		{
 			u = 2*Math.PI*u;
 		
 			var x = clamp( 6*Math.cos( u ), -n, n );
@@ -41,5 +42,6 @@
 		tube([ 0, 0, 0 ], spline( roundedSquare, 10 ), 0.13, [ 100, 6 ], 5, 'dimgray' );
 
 	</script>
+	
 </body>
 </html>

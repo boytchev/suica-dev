@@ -31,8 +31,8 @@
 	<script>
 
 		var dotted = drawing( 128, 1 );
-		for ( var i=0; i<128; i+=4 ) {
-
+		for ( var i=0; i<128; i+=4 )
+		{
 			moveTo( i, 0 );
 			lineTo( i, 1 );
 		}
@@ -41,8 +41,8 @@
 
 
 		var dashed = drawing( 128, 1 );
-		for ( var i=0; i<128; i+=16 ) {
-
+		for ( var i=0; i<128; i+=16 )
+		{
 			moveTo( i, 0 );
 			lineTo( i+12, 0 );
 		}
@@ -51,15 +51,15 @@
 
 
 		var dotDashed = drawing( 128, 1 );
-		for ( var i=0; i<128; i+=8 ) {
-
+		for ( var i=0; i<128; i+=8 )
+		{
 			moveTo( i+2, 0 );
 			lineTo( i+5, 0 );
 		}
 
 		stroke( 'lightsalmon', 1 );
-		for ( var i=0; i<128; i+=8 ) {
-
+		for ( var i=0; i<128; i+=8 )
+		{
 			moveTo( i+7, 0 );
 			lineTo( i+8, 0 );
 		}
@@ -69,6 +69,7 @@
 		a.image = dashed;
 		b.image = dotted;
 		c.image = dotDashed;
+		
 	</script>
 	
 </body>
