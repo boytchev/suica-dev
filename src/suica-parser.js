@@ -882,7 +882,7 @@ class HTMLParser {
 
 		} else {
 
-			p = its.clone;
+			p = window.its.clone;
 
 		}
 
