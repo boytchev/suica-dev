@@ -13,7 +13,7 @@ export default [
 		input: './src/suica.js',
 		output: {
 			file: './dist/suica.js',
-			format: 'es',
+			format: 'umd',
 			banner: `// suica v${pkg.version}\n\n\n`,
 		},
 		external: [
@@ -27,8 +27,8 @@ export default [
 	{
 		input: './src/suica.js',
 		output: {
-			file: './dist/suica.min2.js',
-			format: 'es',
+			file: './dist/suica.min.js',
+			format: 'umd',
 			banner: `/* suica v${pkg.version}*/\n\n\n`,
 		},
 		external: [
@@ -36,7 +36,7 @@ export default [
 		plugins: [
 			nodeResolve(), // Resolves node_modules dependencies like 'three'
 			commonjs(), // Converts UMD/CommonJS to ES Modules
-			terser(),
+			terser({mangle:!false}), // Minify
 		],
   },
 

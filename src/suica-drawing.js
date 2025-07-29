@@ -326,7 +326,7 @@ class Drawing {
 		if ( !this.texture ) {
 
 			this.texture = new THREE.CanvasTexture( this.canvas );
-			this.texture.anisotropy = /*Suica.current*/window.suica.renderer.capabilities.getMaxAnisotropy();
+			this.texture.anisotropy = window.suica.renderer.capabilities.getMaxAnisotropy();
 			this.texture.colorSpace = THREE.SRGBColorSpace;
 			this.texture.wrapS = THREE.RepeatWrapping;
 			this.texture.wrapT = THREE.RepeatWrapping;
@@ -389,7 +389,7 @@ function image( url = null ) {
 
 	texture.colorSpace = THREE.SRGBColorSpace;
 
-	texture.anisotropy = /*Suica.current*/window.suica.renderer.capabilities.getMaxAnisotropy();
+	texture.anisotropy = window.suica.renderer.capabilities.getMaxAnisotropy();
 
 	return texture;
 

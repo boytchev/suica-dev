@@ -148,6 +148,7 @@ class Circle extends Polygon {
 			y = r * Math.sin( a );
 
 		var v = new THREE.Vector3( x, y, 0 ).applyMatrix4( this.suica.orientation.MATRIX );
+
 		return this.objectPosition([ v.x*this.width, v.y*this.height, v.z*this.depth ]);
 
 	} // Circle.randomIn

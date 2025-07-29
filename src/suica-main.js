@@ -9,7 +9,7 @@ import { VRButton } from 'three/addons/webxr/VRButton.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { TrackballControls } from 'three/addons/controls/TrackballControls.js';
 
-import { ANAGLYPH, checkSuicaExists, evaluate, eventCall, ORIENTATIONS, ORTHOGRAPHIC, parseCenter, parseColor, parseNumber, PERSPECTIVE, STEREO } from './suica-globals.js';
+import { ANAGLYPH, checkSuicaExists, CIRCLECOUNT, evaluate, eventCall, ORIENTATIONS, ORTHOGRAPHIC, parseCenter, parseColor, parseNumber, PERSPECTIVE, STEREO } from './suica-globals.js';
 import { HTMLParser } from './suica-parser.js';
 import { Mesh } from './suica-mesh.js';
 import { Cube } from './suica-cube.js';
@@ -961,6 +961,7 @@ class Suica {
 
 	} // Suica.square
 
+
 	cube( ...args ) {
 
 		this.parser?.parseTags();
@@ -969,10 +970,58 @@ class Suica {
 	} // Suica.cube
 
 
+	construct( ...args ) {
+
+		this.parser?.parseTags();
+		return new Construct( this, ...args );
+
+	} // Suica.construct
+
+
+	text3d( ...args ) {
+
+		this.parser?.parseTags();
+		return new Text3D( this, ...args );
+
+	} // Suica.text3d
+
+
+	surface( ...args ) {
+
+		this.parser?.parseTags();
+		return new Surface( this, ...args );
+
+	} // Suica.surface
+
+
+	model( ...args ) {
+
+		this.parser?.parseTags();
+		return new Model( this, ...args );
+
+	} // Suica.model
+
+
+	convex( ...args ) {
+
+		this.parser?.parseTags();
+		return new Convex( this, ...args );
+
+	} // Suica.convex
+
+
+	extrude( ...args ) {
+
+		this.parser?.parseTags();
+		return new Extrude( this, ...args );
+
+	} // Suica.extrude
+
+
 	circle( ...args ) {
 
 		this.parser?.parseTags();
-		return new Polygon( this, Suica.CIRCLECOUNT, ...args );
+		return new Circle( this, ...args );
 
 	} // Suica.circle
 
@@ -996,7 +1045,7 @@ class Suica {
 	cylinder( ...args ) {
 
 		this.parser?.parseTags();
-		return new Prism( this, Suica.CIRCLECOUNT, ...args, false );
+		return new Prism( this, CIRCLECOUNT, ...args, false );
 
 	} // Suica.cylinder
 
@@ -1012,7 +1061,7 @@ class Suica {
 	cone( ...args ) {
 
 		this.parser?.parseTags();
-		return new Pyramid( this, Suica.CIRCLECOUNT, ...args, false );
+		return new Pyramid( this, CIRCLECOUNT, ...args, false );
 
 	} // Suica.cone
 

@@ -3,9 +3,9 @@
 
 CALL npm run build
 
-@misc\jsmin\jsmin <dist\suica.js >dist\suica.min.js
+@REM @misc\jsmin\jsmin <dist\suica.js >dist\suica.min.js
+@REM @copy dist\suica.min.js examples\suica.js
 @copy dist\suica.min.js examples\suica.js
-@REM @copy dist\suica.min2.js examples\suica.js
 
 @echo.
 @echo.
