@@ -17,7 +17,7 @@ const FULL_SIZE = 400;
 const TEST_SIZE = 400;
 const COLOR_DIFF = 0.01;
 
-const TRESHOLT_PERCENTAGE = 98;
+const TRESHOLT_PERCENTAGE = 99;
 
 //const PIXELS_DIFF = 0.005 * TEST_SIZE * TEST_SIZE; // 0.5%
 
