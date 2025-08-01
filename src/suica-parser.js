@@ -496,6 +496,7 @@ class HTMLParser {
 
 	// <cube id="..." center="..." color="..." size="..." wireframe="...">
 	parseTagCUBE( suica, elem ) {
+
 		var p = suica.cube(
 			elem.getAttribute( 'center' ),
 			elem.getAttribute( 'size' ),
@@ -741,6 +742,7 @@ class HTMLParser {
 
 	// <construct id="..." src="..." center="..." size="..." color="...">
 	parseTagCONSTRUCT( suica, elem ) {
+
 		var p = suica.construct(
 			elem.getAttribute( 'src' ),
 			elem.getAttribute( 'size' ),
